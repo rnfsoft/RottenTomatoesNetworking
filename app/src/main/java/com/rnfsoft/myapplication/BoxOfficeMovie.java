@@ -6,18 +6,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by taehee on 8/25/15.
  */
-public class BoxOfficeMovie {
+public class BoxOfficeMovie implements Serializable {
     private String title;
     private int year;
     private String synopsis;
     private String posterUrl;
     private int criticsScore;
+    private String largePosterUrl;
+    private String criticsConsensus;
+    private int audienceScore;
     private ArrayList<String> castList;
+    private static final long serialVersionUID = -8959832007991513854L;
 
     public String getTitle() {
         return title;
@@ -43,6 +48,18 @@ public class BoxOfficeMovie {
         return TextUtils.join(", ", castList);
     }
 
+    public String getLargePosterUrl() {
+        return largePosterUrl;
+    }
+
+    public String getCriticsConsensus() {
+        return criticsConsensus;
+    }
+
+    public int getAudienceScore() {
+        return audienceScore;
+    }
+
     public static BoxOfficeMovie fromJson(JSONObject jsonObject) {
         BoxOfficeMovie b = new BoxOfficeMovie();
 
@@ -53,6 +70,11 @@ public class BoxOfficeMovie {
             b.posterUrl = jsonObject.getJSONObject("posters").getString("thumbnail");
             b.criticsScore = jsonObject.getJSONObject("ratings").getInt("critics_score");
             b.castList = new ArrayList<String>();
+            b.largePosterUrl = jsonObject.getJSONObject("posters").getString("detailed");
+            b.criticsConsensus = jsonObject.getString("critics_consensus");
+            b.audienceScore = jsonObject.getJSONObject("ratings").getInt("audience_score");
+
+
             JSONArray abridgedCast = jsonObject.getJSONArray("abridged_cast");
             for (int i = 0; i < abridgedCast.length(); i++) {
                 b.castList.add(abridgedCast.getJSONObject(i).getString("name"));
