@@ -1,6 +1,8 @@
 Codes from https://guides.codepath.com/android/Rotten-Tomatoes-Networking-Tutorial
 
-Duraion: 1.5 hr
+Time: 1.5 hr
+
+Level: 2/3
 
 Device: Emulator
 
